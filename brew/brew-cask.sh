@@ -9,6 +9,8 @@ apps=(
     google-chrome
     slack
     skitch
+    vagrant
+    virtualbox
     visual-studio-code
 )
 

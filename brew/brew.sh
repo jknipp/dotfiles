@@ -33,6 +33,7 @@ brew upgrade
 
 apps=(
     asdf
+    brew-cask-completion
     coreutils
     curl
     findutils --with-default-names
@@ -42,14 +43,16 @@ apps=(
     gnu-sed --with-default-names
     gnu-tar --with-default-names
     gnu-which --with-default-names
+    gpg1
     grep --with-default-names
     heroku
-    brew-cask-completion
-    openssh
+    influxdb
+    kafkacat
     openssl
     postgresql
     python
     rbenv
+    redis
     tree
     wget
     wifi-password
