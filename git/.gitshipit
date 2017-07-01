@@ -1,0 +1,76 @@
+f() {
+    RED=$(tput setaf 1)
+    BLUE=$(tput setaf 4)
+    GREEN=$(tput setaf 2)
+    MAGENTA=$(tput setaf 5)
+    RESET=$(tput sgr0)
+    BOLD=$(tput bold)
+
+    echo ${BOLD}${MAGENTA}"See https://paper.dropbox.com/doc/Managing-Git-Pull-Requests-4S2uLWj5tcuiiNCoHqZLD for details and the reasoning behind this process"${RESET}
+    
+    # Exit immediately if any subcommand or pipeline returns a non-zero status
+    set -e
+
+    shopt -s nocasematch
+    topic=${1-$(git branch-name)}
+    
+    echo ${BOLD}${BLUE}"\nGetting latest from ${RED}master${RESET}"
+    git checkout master
+    git pull origin master
+    
+    echo ${BOLD}${BLUE}"\nChecking for unexpected commits on ${RED}$topic${RESET}"
+    git checkout $topic
+    
+    revs=$(git rev-list $topic...origin/$topic | wc -l)
+    if [ $revs -ne 0 ]; then
+        echo ${BOLD}${BLUE}"\nCommits found on remote branch ${RED}$topic${BLUE}, pulling them in${RESET}\n"
+        git pull
+        
+	# TODO We should be able to remove this as we now exist on non-zero return codes from git commands
+	if [[ $(git ls-files -u | wc -l) -ne 0 ]]; then
+            echo ${BOLD}${RED}"ERROR: Merging changes to $topic from remote, please resolve conflicts before continuing"${RESET}
+            exit 1
+        fi
+    else
+        echo ${BOLD}${BLUE}"No commits on remote branch ${RED}$topic${BLUE} skipping git pull${RESET}"
+    fi
+    
+    echo ${BOLD}${BLUE}"\nRebasing ${RED}$topic${BLUE} onto ${RED}master${RESET}"
+    git rebase master
+    echo ${BOLD}${BLUE}"\nForce push rebase to remote branch ${RED}$topic${RESET}"
+    git push -f origin $topic
+    
+    echo ${BOLD}${BLUE}"\nMerging ${RED}$topic${BLUE} to ${RED}master${RESET}"
+    git checkout master
+    git merge --ff-only $topic
+    
+    # TODO We should be able to remove this as we now exist on non-zero return codes from git commands
+    if [[ $(git ls-files -u | wc -l) -ne 0 ]]
+    then
+        echo ${BOLD}${RED}"\nERROR: Merging changes from $topic to master, there have been commits on master since you last rebased."
+        echo "*** You will need to reset master and do the rebase procedure again!\n"${RESET}
+                exit 1
+    fi
+
+    echo "**************************************************\n"
+    echo ${BOLD}${MAGENTA}"SUCCESS!" 
+    echo ${GREEN}"Checking the git log... "
+    echo "If the output has a * down the column on the left, you're all good!"${RESET}
+    sleep 2
+    git log --graph --oneline
+    echo ${BOLD}"Make sure you have run tests and added the test suite timestamp - ${RED}'git commit --amend'${GREEN} if neccessary\n\n"
+    sleep 2
+	
+    while true; do
+    	read -p "${BOLD}${RED}Do you like to live dangerously and choose to let this script push changes for you??? ${RESET}[${GREEN}y${RESET}|${RED}n${RESET}] " yn
+    	case $yn in
+        	[Yy]* ) 
+                echo ${BOLD}${BLUE}"Ahh a risk taker! No turning back now... pushing changes to ${RED}master${RESET}\n"; 
+                git push origin master;
+		exit;;
+        	* ) 
+                echo "\n${BOLD}${RED}WARNING: ${GREEN}You will need to run ${BOLD}${RED}'git push origin master'${RESET} yourself to push your branch changes to the master branch!\n\n"; 
+                exit;;
+    	esac
+    done
+}; 

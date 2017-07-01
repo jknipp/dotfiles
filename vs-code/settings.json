@@ -1,0 +1,41 @@
+{
+    "sync.gist": "2bb552c83ee698fdc8d90a8ee9953206",
+    "sync.lastUpload": "2017-01-20T18:24:52.831Z",
+    "sync.autoDownload": true,
+    "sync.autoUpload": true,
+    "sync.lastDownload": "1970-01-01T00:00:00.000Z",
+    "sync.version": 262,
+    "sync.showSummary": true,
+    "sync.forceDownload": false,
+    "sync.workspaceSync": false,
+    "sync.anonymousGist": false,
+    "window.zoomLevel": 0,
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
+
+    "[Eex]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.detectIndentation": true,
+        "editor.formatOnSave": false
+
+    },
+    "editor.wordWrap": "on",
+    "workbench.colorTheme": "Default Light+",
+    "workbench.iconTheme": "vscode-great-icons",
+    "editor.dragAndDrop": true,
+    "sync.host": "",
+    "sync.pathPrefix": "",
+    "[elixir]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.detectIndentation": true,
+        "editor.formatOnSave": true
+    },
+    "files.insertFinalNewline": true,
+    "explorer.openEditors.visible": 9,
+    "workbench.sideBar.location": "left",
+    "workbench.statusBar.visible": true,
+    "workbench.activityBar.visible": true,
+    "editor.minimap.enabled": false
+}
