@@ -2,7 +2,7 @@
 
 # https://github.com/kaicataldo/dotfiles/blob/master/bin/install.sh
 
-# This symlinks all the dotfiles (and .atom/) to ~/
+# This symlinks all the dotfiles to ~/
 # It also symlinks ~/bin for easy updating
 
 # This is safe to run multiple times and will prompt you about anything unclear
@@ -182,10 +182,7 @@ declare -a FILES_TO_SYMLINK=(
   
 )
 
-# FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim bin" # add in vim and the binaries
-
-# Move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
-
+# Backup any existing dotfiles in homedir to dotfiles_old directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
 for i in ${FILES_TO_SYMLINK[@]}; do
   echo "Moving any existing dotfiles from ~ to $dir_backup"
   mv ~/.${i##*/} ~/dotfiles_old/
@@ -193,7 +190,6 @@ done
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 main() {
 
   local i=''
@@ -201,7 +197,6 @@ main() {
   local targetFile=''
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
   for i in ${FILES_TO_SYMLINK[@]}; do
 
     sourceFile="$(pwd)/$i"
@@ -227,22 +222,18 @@ main() {
 
 }
 
-# Package managers & packages
-
-# . "$DOTFILES_DIR/install/brew.sh"
-# . "$DOTFILES_DIR/install/npm.sh"
-
-# if [ "$(uname)" == "Darwin" ]; then
-    # . "$DOTFILES_DIR/install/brew-cask.sh"
-# fi
-
 main
 
 ###############################################################################
 # Zsh                                                                         #
 ###############################################################################
 
+# Default to zsh 
+chsh -s $(which zsh)
+
 # Install Zsh settings / themes
+# Reload zsh settings
+source ~/.zshrc
 
 ###############################################################################
 # Terminal & iTerm 2                                                          #
@@ -257,5 +248,3 @@ main
 # Don’t display the annoying prompt when quitting iTerm
 #defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
-# Reload zsh settings
-source ~/.zshrc

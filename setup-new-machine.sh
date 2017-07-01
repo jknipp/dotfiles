@@ -1,29 +1,13 @@
-# Copy paste this file in bit by bit.
-# Don't run it.
-
-echo "Do not run this script in one go. Hit Ctrl-C NOW"
-read -n 1
-
 ###############################################################################
 # Backup old machine's dotfiles                                               #
 ###############################################################################
-mkdir -p ~/.olddotfiles/home
+mkdir -p ~/migration/home
 cd ~/migration
 
-# then compare brew-list to what's in `brew.sh`
-#   comm <(sort brew-list.txt) <(sort brew.sh-cleaned-up)
-
+# Backup anything we may alter
 cp -R ~/.ssh ~/migration/home
 cp -R ~/Documents ~/migration?
 cp ~/.gitconfig ~/migration
-cp ~/.z ~/migration # z history file.
-
-
-# iTerm settings.
-  # Prefs, General, Use settings from Folder
-
-# Finder settings
-
 
 ###############################################################################
 # XCode Command Line Tools                                                    #
@@ -77,8 +61,15 @@ $HOME/dotfiles/brew/brew-cask.sh
 curl -L https://github.com/gma/bundler-exec/raw/master/bundler-exec.sh > ~/.bundler-exec.sh
 
 ###############################################################################
+# OSX defaults                                                                #
+# https://github.com/hjuutilainen/dotfiles/blob/master/bin/osx-user-defaults.sh
+###############################################################################
+
+sh osx/set-defaults.sh
+
+###############################################################################
 # Symlinks to link dotfiles into ~/                                           #
 ###############################################################################
 
-./setup.sh
+sh setup.sh
 
