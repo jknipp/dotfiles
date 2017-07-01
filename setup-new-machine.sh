@@ -1,15 +1,4 @@
 ###############################################################################
-# Backup old machine's dotfiles                                               #
-###############################################################################
-mkdir -p ~/migration/home
-cd ~/migration
-
-# Backup anything we may alter
-cp -R ~/.ssh ~/migration/home
-cp -R ~/Documents ~/migration?
-cp ~/.gitconfig ~/migration
-
-###############################################################################
 # XCode Command Line Tools                                                    #
 ###############################################################################
 
@@ -51,8 +40,8 @@ fi
 # Homebrew                                                                    #
 ###############################################################################
 
-$HOME/dotfiles/brew/brew.sh
-$HOME/dotfiles/brew/brew-cask.sh
+sh $HOME/dotfiles/brew/brew.sh
+sh $HOME/dotfiles/brew/brew-cask.sh
 
 ###############################################################################
 # Bundle Exec                                                                    #

@@ -12,14 +12,11 @@ then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-brew tap homebrew/versions
-brew tap homebrew/dupes
-
 # Make sure we’re using the latest Homebrew
 brew update
 
 # Upgrade any already-installed formulae
-brew upgrade --all
+brew upgrade
 
 # Install the Homebrew packages I use on a day-to-day basis.
 #
@@ -46,7 +43,8 @@ apps=(
     gnu-tar --with-default-names
     gnu-which --with-default-names
     grep --with-default-names
-    homebrew/completions/brew-cask-completion
+    heroku
+    brew-cask-completion
     openssh
     openssl
     postgresql
@@ -56,13 +54,6 @@ apps=(
     wget
     wifi-password
     zsh
-    # work only
-    gpg1 
-    heroku
-    influxdb
-    kafkacat
-    postgresql
-    redis
 )
 
 brew install "${apps[@]}"

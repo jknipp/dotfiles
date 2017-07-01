@@ -178,14 +178,13 @@ declare -a FILES_TO_SYMLINK=(
   'git/.gitshipit'
   'vim/.vimrc'
   'zsh/.zshrc'
-  'zsh/.zshenv'
   
 )
 
 # Backup any existing dotfiles in homedir to dotfiles_old directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
 for i in ${FILES_TO_SYMLINK[@]}; do
   echo "Moving any existing dotfiles from ~ to $dir_backup"
-  mv ~/.${i##*/} ~/dotfiles_old/
+  mv ~/${i##*/} ~/dotfiles_old/
 done
 
 
@@ -200,7 +199,7 @@ main() {
   for i in ${FILES_TO_SYMLINK[@]}; do
 
     sourceFile="$(pwd)/$i"
-    targetFile="$HOME/.$(printf "%s" "$i" | sed "s/.*\/\(.*\)/\1/g")"
+    targetFile="$HOME/$(printf "%s" "$i" | sed "s/.*\/\(.*\)/\1/g")"
 
     if [ ! -e "$targetFile" ]; then
       execute "ln -fs $sourceFile $targetFile" "$targetFile → $sourceFile"

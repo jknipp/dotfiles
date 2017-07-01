@@ -86,7 +86,5 @@ alias reloadzsh="source ~/.zshrc"
 
 # Rbenv environment setup
 eval "$(rbenv init -)"
-
+[ -f ~/.bundler-exec.sh ] && source ~/.bundler-exec.sh
 . $HOME/.asdf/completions/asdf.bash
-
-
