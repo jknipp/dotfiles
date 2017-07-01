@@ -14,6 +14,9 @@ apps=(
     google-chrome
     slack
     visual-studio-code
+    # Work Only
+    vagrant
+    virtualbox
 )
 
 brew cask install "${apps[@]}"

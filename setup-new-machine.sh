@@ -67,9 +67,14 @@ fi
 # Homebrew                                                                    #
 ###############################################################################
 
-$HOME/dotfiles/install/brew.sh
-$HOME/dotfiles/install/brew-cask.sh
+$HOME/dotfiles/brew/brew.sh
+$HOME/dotfiles/brew/brew-cask.sh
 
+###############################################################################
+# Bundle Exec                                                                    #
+###############################################################################
+
+curl -L https://github.com/gma/bundler-exec/raw/master/bundler-exec.sh > ~/.bundler-exec.sh
 
 ###############################################################################
 # Symlinks to link dotfiles into ~/                                           #

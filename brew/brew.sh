@@ -35,6 +35,7 @@ brew upgrade --all
 # which version I'm using.
 
 apps=(
+    asdf
     coreutils
     curl
     findutils --with-default-names
@@ -48,7 +49,9 @@ apps=(
     homebrew/completions/brew-cask-completion
     openssh
     openssl
+    postgresql
     python
+    rbenv
     tree
     wget
     wifi-password
@@ -59,7 +62,6 @@ apps=(
     influxdb
     kafkacat
     postgresql
-    rbenv
     redis
 )
 
