@@ -178,6 +178,7 @@ declare -a FILES_TO_SYMLINK=(
   'git/.gitshipit'
   'vim/.vimrc'
   'zsh/.zshrc'
+  'bundler-exec.sh'
   
 )
 

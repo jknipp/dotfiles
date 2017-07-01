@@ -88,3 +88,5 @@ alias reloadzsh="source ~/.zshrc"
 eval "$(rbenv init -)"
 [ -f ~/.bundler-exec.sh ] && source ~/.bundler-exec.sh
 . $HOME/.asdf/completions/asdf.bash
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
