@@ -3,6 +3,7 @@
 # Java must be manually installed first from Oracle... Ugh.
 # http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
+# http://www.jenv.be/
 brew install jenv
 
 # Add to bash
