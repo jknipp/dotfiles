@@ -14,7 +14,7 @@
 	df = diff
   	lg = log -p
 	l  = log --graph --oneline
-	#l  = log --pretty=format:'%h %s'
+	ll = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
 	amend = commit --amend
 	wip = !"f() { msg=${1-WIP}; git commit -am \"$msg\"; }; f"
 	save = !"f() { msg=${1-SAVEPOINT}; git add -A && git commit -m \"$msg\"; }; f"
@@ -26,24 +26,24 @@
 	branch2tag = !"f() { git tag $1 refs/heads/$1; git branch -D $1; }; f"
 
 	rm-remote-branch = !"f() { topic=${1-$(git branch-name)}; git push origin :$topic; }; f"
-	rm-local-branch = !"f() { topic=${1-$(git branch-name)}; git checkout master; git branch -d $topic; }; f"
+	rm-local-branch = !"f() { topic=${1-$(git branch-name)}; git branch -d $topic; }; f"
 	rm-branch-fully = !"f() { topic=${1-$(git branch-name)}; git rm-local-branch $topic; git rm-remote-branch $topic; }; f"
 
 	publish = "!git push -u origin $(git branch-name)"
 	unpublish = "!git push origin :$(git branch-name)"
-	
+
 	ignore = update-index --skip-worktree
 	unignore = update-index --no-skip-worktree
 	ignored = !git ls-files -v | grep "^[[:lower:]]"
-	
+
 	prune = fetch -p
-	
+
 	# Revert local commit before you probably tried to commit on master instead of your branch
 	# http://stackoverflow.com/questions/927358/how-to-undo-last-commits-in-git
-	oh-shit = reset HEAD~1
+	reset-prev-head = reset HEAD~1
 
 	# Revert commit pushed to remote origin (most likely master), boy you messed up now
-	#oh-fuck = 
+	#oh-fuck =
 
 	# Unstage any files that have been added to the staging area
 	unstage = reset HEAD
@@ -53,8 +53,10 @@
 	workprofile = config user.email \"jared@spreedly.com\"
 
 [credential]
-	helper = osxkeychain
+	helper = store
 
 
 [commit]
 	template = /Users/jaredknipp/.gitcommitmessage.txt
+[rerere]
+	enabled = true
